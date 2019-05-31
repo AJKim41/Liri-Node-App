@@ -5,21 +5,24 @@ const moment = require("moment");
 const Spotify = require("node-spotify-api");
 const fs = require("fs");
 
-console.log(keys.spotify.id);
-console.log(keys.spotify.secret);
-
 const concert = userSearch => {
   axios
     .get(
       `https://rest.bandsintown.com/artists/${userSearch}/events?app_id=codingbootcamp`
     )
     .then(response => {
-      console.log(response.data[0].venue.name);
-      console.log(
-        `${response.data[0].venue.city}, ${response.data[0].venue.region}`
-      );
       // https://momentjs.com/guides/
-      console.log(moment(response.data[0].datetime).format("MM/DD/YYYY"));
+      let showDate = moment(response.data[0].datetime).format("MM/DD/YYYY");
+      let res = `
+      ${response.data[0].venue.name}
+      ${response.data[0].venue.city}, ${response.data[0].venue.region}
+      ${showDate}`;
+      console.log(res);
+      fs.appendFile("./userSearch", res, function(err) {
+        if (err) {
+          console.log(err);
+        }
+      });
     });
 };
 
@@ -30,15 +33,22 @@ const movie = userSearch => {
   axios
     .get(`http://www.omdbapi.com/?t=${userSearch}&y=&plot=short&apikey=trilogy`)
     .then(response => {
-      console.log(response.data.Title);
-      console.log(response.data.Year);
-      console.log(response.data.Rated);
-      console.log(response.data.imdbRating);
-      console.log(response.data.Ratings[1].Value);
-      console.log(response.data.Country);
-      console.log(response.data.Language);
-      console.log(response.data.Plot);
-      console.log(response.data.Actors);
+      let res = `
+      ${response.data.Title}
+      ${response.data.Year}
+      ${response.data.Rated}
+      ${response.data.imdbRating}
+      ${response.data.Ratings[1].Value}
+      ${response.data.Country}
+      ${response.data.Language}
+      ${response.data.Plot}
+      ${response.data.Actors}`;
+      console.log(res);
+      fs.appendFile("./userSearch", res, function(err) {
+        if (err) {
+          console.log(err);
+        }
+      });
     });
 };
 
@@ -54,10 +64,17 @@ const spotify = userSearch => {
       return console.log("Error occurred: " + err);
     }
 
-    console.log(data.tracks.items[0].album.artists[0].name);
-    console.log(data.tracks.items[0].name);
-    console.log(data.tracks.items[0].preview_url);
-    console.log(data.tracks.items[0].album.name);
+    let res = `
+    ${data.tracks.items[0].album.artists[0].name}
+    ${data.tracks.items[0].name}
+    ${data.tracks.items[0].preview_url}
+    ${data.tracks.items[0].album.name}`;
+    console.log(res);
+    fs.appendFile("./userSearch", res, function(err) {
+      if (err) {
+        console.log(err);
+      }
+    });
   });
 };
 

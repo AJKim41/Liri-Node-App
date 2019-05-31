@@ -15,13 +15,11 @@ const doWhatItSays = () => {
       .split(" ")
       .slice(1)
       .join(" ");
-    console.log(userCommand);
-    console.log(userSearch);
-    decisionMaking();
+    liri();
   });
 };
 
-const decisionMaking = () => {
+const liri = () => {
   switch (userCommand) {
     case "concert-this":
       doThis.concertThis(userSearch);
@@ -39,4 +37,5 @@ const decisionMaking = () => {
       break;
   }
 };
-decisionMaking();
+
+liri();
