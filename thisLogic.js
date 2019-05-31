@@ -16,7 +16,8 @@ const concert = userSearch => {
       let res = `
       ${response.data[0].venue.name}
       ${response.data[0].venue.city}, ${response.data[0].venue.region}
-      ${showDate}`;
+      ${showDate}
+      `;
       console.log(res);
       fs.appendFile("./userSearch", res, function(err) {
         if (err) {
@@ -42,7 +43,8 @@ const movie = userSearch => {
       ${response.data.Country}
       ${response.data.Language}
       ${response.data.Plot}
-      ${response.data.Actors}`;
+      ${response.data.Actors}
+      `;
       console.log(res);
       fs.appendFile("./userSearch", res, function(err) {
         if (err) {
@@ -68,7 +70,8 @@ const spotify = userSearch => {
     ${data.tracks.items[0].album.artists[0].name}
     ${data.tracks.items[0].name}
     ${data.tracks.items[0].preview_url}
-    ${data.tracks.items[0].album.name}`;
+    ${data.tracks.items[0].album.name}
+    `;
     console.log(res);
     fs.appendFile("./userSearch", res, function(err) {
       if (err) {
